@@ -65,8 +65,8 @@ jobs:
           ECR_REPOSITORY: product-microservice
           IMAGE_TAG: latest
         run: |
-          docker build -t $ECR_REGISTRY/product-microservice:latest --platform linux/amd64 .
-          docker push $ECR_REGISTRY/product-microservice:latest
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --platform linux/amd64 .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       - name: Deploy to ECS
         run: |
           aws ecs update-service --cluster product-microservice-cluster --service product-microservice-service --force-new-deployment
